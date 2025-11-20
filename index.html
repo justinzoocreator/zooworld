@@ -3,18 +3,24 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portofolio & Personal Branding - Pecinta Hewan</title>
+    <title>Justin's Zoo Wonders - Portofolio & Personal Branding</title>
     <style>
+        :root {
+            --primary: #3aa66b;
+            --secondary: #1f6844;
+            --light: #f3f7f5;
+            --dark: #1a1a1a;
+        }
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            color: #333;
+            font-family: "Poppins", Arial, sans-serif;
+            background: var(--light);
+            color: var(--dark);
         }
         header {
-            background: #4caf50;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 40px 20px;
+            padding: 70px 20px;
             text-align: center;
         }
         header img {
@@ -22,89 +28,153 @@
             height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border: 6px solid rgba(255,255,255,0.8);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
         }
+        header h1 {
+            font-size: 2.4rem;
+            margin-top: 25px;
+        }
+        header p {
+            opacity: 0.95;
+            font-size: 1.1rem;
+        }
+
         .container {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 40px auto;
             padding: 20px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        h1 {
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+            transition: 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+        .card h2 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+
+        /* Merchandise Grid */
+        .merch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
             margin-top: 20px;
         }
-        .section {
-            margin-bottom: 40px;
+        .merch-item {
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            transition: 0.3s ease;
         }
-        .section h2 {
-            color: #4caf50;
+        .merch-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 28px rgba(0,0,0,0.15);
         }
+        .merch-item img {
+            width: 100%;
+            object-fit: cover;
+        }
+        .merch-info {
+            padding: 15px 18px;
+        }
+        .merch-info h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+        .merch-info a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 16px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: 0.25s;
+        }
+        .merch-info a:hover {
+            background: var(--secondary);
+        }
+
         footer {
             text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            background: #e0e0e0;
+            padding: 25px;
+            margin-top: 50px;
+            background: #dfeae5;
+            color: #333;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <img src="https://raw.githubusercontent.com/justinzoocreator/zooworld/refs/heads/main/ChatGPT%20Image%2020%20Nov%202025%2C%2011.09.18.png" alt="Foto Profil" />
-        <h1>Justin Wijaya - Pecinta Hewan & Calon Pendiri Zoo Collection</h1>
-        <p>Mendedikasikan hidup untuk mengenal, merawat, dan mencintai dunia satwa.</p>
-    </header>
+<header>
+    <img src="https://raw.githubusercontent.com/justinzoocreator/zooworld/refs/heads/main/ChatGPT%20Image%2020%20Nov%202025%2C%2011.09.18.png" alt="Foto Profil" />
+    <h1>Justin Wijaya — Founder of Justin's Zoo Wonders</h1>
+    <p>Pecinta hewan, peneliti fauna, dan pencipta koleksi kebun binatang digital.</p>
+</header>
 
-    <div class="container">
+<div class="container">
 
-        <div class="section">
-            <h2>Tentang Saya</h2>
-            <p>
-                Halo! Saya Justin, seseorang yang memiliki rasa cinta yang mendalam terhadap hewan dari berbagai jenis.
-                Ketertarikan saya bukan hanya sebatas melihat, tetapi juga meneliti, belajar, dan merawat mereka. Impian terbesar
-                saya adalah membangun "Zoo Collection" saya sendiri — sebuah ruang penuh edukasi, konservasi, dan keajaiban dunia satwa.
-            </p>
-        </div>
-
-        <div class="section">
-            <h2>Misi & Visi Personal Branding</h2>
-            <ul>
-                <li>Mengedukasi masyarakat mengenai pentingnya konservasi satwa dan lingkungan.</li>
-                <li>Membangun Zoo Collection pribadi yang menjadi pusat edukasi dan hiburan.</li>
-                <li>Menyebarkan kecintaan terhadap hewan melalui konten kreatif, foto, dan proyek digital.</li>
-                <li>Menjalin koneksi dengan pecinta hewan dan komunitas satwa di seluruh dunia.</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>Portofolio dan Aktivitas</h2>
-            <p>Beberapa aktivitas dan minat saya dalam dunia satwa antara lain:</p>
-            <ul>
-                <li>Mengambil foto hewan dan membuat karya digital bertema fauna.</li>
-                <li>Mengembangkan konsep visual untuk koleksi kebun binatang pribadi.</li>
-                <li>Mempelajari perilaku hewan secara mendalam.</li>
-                <li>Membuat desain kaos, logo, dan aset digital bertema satwa.</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>Kontak & Media Sosial</h2>
-            <p>Ingin berkolaborasi atau mengenal saya lebih jauh? Anda dapat menghubungi saya melalui media sosial atau email.</p>
-            <ul>
-                <li>Email: your-email@example.com</li>
-                <li>Instagram: @yourusername</li>
-                <li>GitHub: @justinzoocreator</li>
-            </ul>
-        </div>
-
+    <div class="card">
+        <h2>Tentang Saya</h2>
+        <p>
+            Saya Justin, seseorang yang memiliki cinta mendalam terhadap hewan dan dunia satwa. Ketertarikan saya tumbuh dari rasa penasaran yang besar
+            terhadap bagaimana hewan hidup, berperilaku, dan berinteraksi. Dari sanalah muncul impian besar saya: membangun <b>Zoo Collection</b> saya sendiri
+            sebagai ruang edukasi, konservasi, dan hiburan yang dapat dinikmati banyak orang.
+        </p>
     </div>
 
-    <footer>
-        © 2025 Justin Wijaya — Pecinta Hewan & Zoo Collection Enthusiast
-    </footer>
+    <div class="card">
+        <h2>Misi & Visi</h2>
+        <ul>
+            <li>Menyebarkan kecintaan terhadap fauna melalui edukasi digital dan visual.</li>
+            <li>Membangun "Justin's Zoo Wonders" sebagai koleksi kebun binatang modern.</li>
+            <li>Mendorong kesadaran terhadap perlindungan hewan dan habitatnya.</li>
+            <li>Menciptakan karya kreatif dan merchandise bertema satwa.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Merchandise Resmi — Justin's Zoo Wonders</h2>
+        <p>Koleksi baju, desain hewan lucu, dan karya eksklusif yang dapat Anda beli kapan saja!</p>
+
+        <div class="merch-grid">
+            <div class="merch-item">
+                <img src="https://res.cloudinary.com/teepublic/image/private/s--Example1--/t_Preview/b_rgb:ffffff,c_limit,f_auto,h_630,q_90,w_630/v123456789/justinszoo_design.png" alt="Merch Sample" />
+                <div class="merch-info">
+                    <h3>Kunjungi Toko Resmi</h3>
+                    <a href="https://www.teepublic.com/user/justin-s-zoo-wonders" target="_blank">Lihat Merchandise</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Kontak & Media Sosial</h2>
+        <ul>
+            <li>Email: your-email@example.com</li>
+            <li>Instagram: @yourusername</li>
+            <li>GitHub: @justinzoocreator</li>
+        </ul>
+    </div>
+
+</div>
+
+<footer>
+    © 2025 Justin's Zoo Wonders — Passion for Animals & Creative Wildlife Collections
+</footer>
 
 </body>
 </html>
