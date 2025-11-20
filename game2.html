@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino Dash Racing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial Black', Arial, sans-serif;
+            background: linear-gradient(135deg, #2E8B57, #228B22, #32CD32);
+            overflow: hidden;
+            height: 100vh;
+            user-select: none;
+        }
+
+        #game-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header HUD */
+        #hud {
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        #timer {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        #progress-container {
+            flex: 1;
+            margin: 0 20px;
+            height: 20px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.1s ease;
+        }
+
+        #progress1 { background: #FF6B6B; }
+        #progress2 { background: #4ECDC4; }
+
+        /* Track Area */
+        #track {
+            flex: 1;
+            position: relative;
+            background: 
+                /* Trees in background */
+                radial-gradient(circle at 20% 80%, #228B22 8px, transparent 8px),
+                radial-gradient(circle at 40% 75%, #32CD32 10px, transparent 10px),
+                radial-gradient(circle at 60% 85%, #228B22 6px, transparent 6px),
+                radial-gradient(circle at 80% 70%, #32CD32 9px, transparent 9px),
+                /* Grass pattern */
+                repeating-linear-gradient(90deg, 
+                    #90EE90 0px, #90EE90 2px, 
+                    #98FB98 2px, #98FB98 4px),
+                /* Main background */
+                linear-gradient(180deg, #87CEEB 0%, #98FB98 40%, #90EE90 100%);
+            background-size: 
+                200px 200px, 250px 200px, 180px 180px, 220px 200px,
+                8px 8px,
+                100% 100%;
+            overflow: hidden;
+        }
+
+        /* Racing Lanes */
+        .lane {
+            position: absolute;
+            width: 100%;
+            height: 80px;
+            border: 3px dashed rgba(255,255,255,0.5);
+            border-left: none;
+            border-right: none;
+        }
+
+        #lane1 {
+            top: 25%;
+            background: rgba(255,107,107,0.1);
+        }
+
+        #lane2 {
+            top: 55%;
+            background: rgba(78,205,196,0.1);
+        }
+
+        /* Dinosaurs */
+        .dinosaur {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            font-size: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s ease;
+            z-index: 10;
+        }
+
+        #dino1 {
+            top: calc(25% + 10px);
+            left: 20px;
+            color: #FF6B6B;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        #dino2 {
+            top: calc(55% + 10px);
+            left: 20px;
+            color: #4ECDC4;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Finish Line */
+        #finish-line {
+            position: absolute;
+            right: 50px;
+            top: 20%;
+            bottom: 20%;
+            width: 10px;
+            background: repeating-linear-gradient(
+                0deg,
+                black 0px, black 20px,
+                white 20px, white 40px
+            );
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        #finish-text {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            font-size: 18px;
+        }
+
+        /* Controls */
+        #controls {
+            background: rgba(0,0,0,0.9);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            min-height: 120px;
+        }
+
+        .control-section {
+            text-align: center;
+            color: white;
+        }
+
+        .control-label {
+            font-size: 14px;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .run-button {
+            width: 120px;
+            height: 60px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            text-transform: uppercase;
+            box-shadow: 0 5px 0 rgba(0,0,0,0.3);
+            position: relative;
+            top: 0;
+        }
+
+        #run1 {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #8B4513;
+        }
+
+        #run2 {
+            background: linear-gradient(45deg, #00CED1, #20B2AA);
+            color: white;
+        }
+
+        .run-button:hover {
+            transform: scale(1.05);
+        }
+
+        .run-button:active {
+            top: 3px;
+            box-shadow: 0 2px 0 rgba(0,0,0,0.3);
+        }
+
+        .speed-indicator {
+            margin-top: 10px;
+            font-size: 12px;
+            height: 20px;
+        }
+
+        /* Start Screen */
+        #start-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: white;
+        }
+
+        #start-screen h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            background: linear-gradient(45deg, #FFD700, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        #start-screen p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            text-align: center;
+            max-width: 600px;
+            line-height: 1.5;
+        }
+
+        #start-button {
+            padding: 15px 40px;
+            font-size: 20px;
+            background: linear-gradient(45deg, #32CD32, #228B22);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        #start-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Winner Popup */
+        #winner-popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.95);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            display: none;
+            z-index: 2000;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 3px solid #FFD700;
+        }
+
+        #winner-popup h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        #winner-popup p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+        }
+
+        #restart-button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background: linear-gradient(45deg, #4ECDC4, #45B7B8);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        #restart-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #hud {
+                padding: 5px 10px;
+            }
+            
+            #timer {
+                font-size: 18px;
+            }
+            
+            #controls {
+                gap: 20px;
+                padding: 15px;
+            }
+            
+            .run-button {
+                width: 100px;
+                height: 50px;
+                font-size: 16px;
+            }
+            
+            #start-screen h1 {
+                font-size: 2.5em;
+            }
+            
+            .dinosaur {
+                width: 50px;
+                height: 50px;
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <!-- Start Screen -->
+        <div id="start-screen">
+            <h1>🦕 DINO DASH RACING 🦖</h1>
+            <p>
+                Selamat datang di balapan dinosaurus paling seru!<br>
+                Tekan tombol RUN dengan cepat untuk membuat dinosaurusmu berlari.<br>
+                Dinosaurus pertama yang mencapai garis finish adalah pemenangnya!
+            </p>
+            <button id="start-button">MULAI BALAPAN!</button>
+        </div>
+
+        <!-- Game HUD -->
+        <div id="hud">
+            <div id="timer">0:00</div>
+            <div id="progress-container">
+                <div id="progress1" class="progress-bar" style="width: 0%"></div>
+                <div id="progress2" class="progress-bar" style="width: 0%; margin-top: -20px;"></div>
+            </div>
+            <div style="color: #FFD700; font-weight: bold;">DINO DASH</div>
+        </div>
+
+        <!-- Racing Track -->
+        <div id="track">
+            <div class="lane" id="lane1"></div>
+            <div class="lane" id="lane2"></div>
+            
+            <div class="dinosaur" id="dino1">🦕</div>
+            <div class="dinosaur" id="dino2">🦖</div>
+            
+            <div id="finish-line"></div>
+            <div id="finish-text">FINISH</div>
+        </div>
+
+        <!-- Game Controls -->
+        <div id="controls">
+            <div class="control-section">
+                <div class="control-label">PLAYER 1</div>
+                <button class="run-button" id="run1">RUN!</button>
+                <div class="speed-indicator" id="speed1">Siap berlari...</div>
+            </div>
+            
+            <div class="control-section">
+                <div class="control-label">PLAYER 2</div>
+                <button class="run-button" id="run2">RUN!</button>
+                <div class="speed-indicator" id="speed2">Siap berlari...</div>
+            </div>
+        </div>
+
+        <!-- Winner Popup -->
+        <div id="winner-popup">
+            <h2>🏆 PEMENANG! 🏆</h2>
+            <p id="winner-text">Player 1 Menang!</p>
+            <p id="final-time">Waktu: 1:23</p>
+            <button id="restart-button">BALAPAN LAGI!</button>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        let gameStarted = false;
+        let gameFinished = false;
+        let startTime = 0;
+        
+        // Dinosaur positions (0 to 100%)
+        let dino1Position = 0;
+        let dino2Position = 0;
+        
+        // Speed and clicking mechanics
+        let dino1Speed = 0;
+        let dino2Speed = 0;
+        let lastClick1 = 0;
+        let lastClick2 = 0;
+        let clickCount1 = 0;
+        let clickCount2 = 0;
+        
+        // DOM Elements
+        const startScreen = document.getElementById('start-screen');
+        const startButton = document.getElementById('start-button');
+        const run1Button = document.getElementById('run1');
+        const run2Button = document.getElementById('run2');
+        const dino1Element = document.getElementById('dino1');
+        const dino2Element = document.getElementById('dino2');
+        const timerElement = document.getElementById('timer');
+        const progress1 = document.getElementById('progress1');
+        const progress2 = document.getElementById('progress2');
+        const speed1Indicator = document.getElementById('speed1');
+        const speed2Indicator = document.getElementById('speed2');
+        const winnerPopup = document.getElementById('winner-popup');
+        const winnerText = document.getElementById('winner-text');
+        const finalTimeText = document.getElementById('final-time');
+        const restartButton = document.getElementById('restart-button');
+
+        // Start game
+        startButton.addEventListener('click', startGame);
+        restartButton.addEventListener('click', restartGame);
+
+        function startGame() {
+            startScreen.style.display = 'none';
+            gameStarted = true;
+            gameFinished = false;
+            startTime = Date.now();
+            gameLoop();
+        }
+
+        function restartGame() {
+            winnerPopup.style.display = 'none';
+            dino1Position = 0;
+            dino2Position = 0;
+            dino1Speed = 0;
+            dino2Speed = 0;
+            gameFinished = false;
+            clickCount1 = 0;
+            clickCount2 = 0;
+            updateDinosaurPositions();
+            updateProgressBars();
+            startTime = Date.now();
+            gameLoop();
+        }
+
+        // Button clicking mechanics
+        run1Button.addEventListener('click', () => handleClick(1));
+        run2Button.addEventListener('click', () => handleClick(2));
+
+        function handleClick(player) {
+            if (!gameStarted || gameFinished) return;
+
+            const currentTime = Date.now();
+            
+            if (player === 1) {
+                const timeDiff = currentTime - lastClick1;
+                lastClick1 = currentTime;
+                clickCount1++;
+                
+                if (timeDiff >= 200 && timeDiff <= 350) {
+                    dino1Speed = Math.min(dino1Speed + 2, 10);
+                    speed1Indicator.textContent = "Bagus! 🔥";
+                    speed1Indicator.style.color = "#32CD32";
+                } else if (timeDiff < 200) {
+                    speed1Indicator.textContent = "Terlalu cepat! ⚡";
+                    speed1Indicator.style.color = "#FFA500";
+                } else {
+                    dino1Speed = Math.min(dino1Speed + 1, 5);
+                    speed1Indicator.textContent = "Terlalu lambat! 🐌";
+                    speed1Indicator.style.color = "#FF6B6B";
+                }
+                
+                // Add visual feedback
+                run1Button.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    run1Button.style.transform = 'scale(1)';
+                }, 100);
+                
+            } else {
+                const timeDiff = currentTime - lastClick2;
+                lastClick2 = currentTime;
+                clickCount2++;
+                
+                if (timeDiff >= 200 && timeDiff <= 350) {
+                    dino2Speed = Math.min(dino2Speed + 2, 10);
+                    speed2Indicator.textContent = "Bagus! 🔥";
+                    speed2Indicator.style.color = "#32CD32";
+                } else if (timeDiff < 200) {
+                    speed2Indicator.textContent = "Terlalu cepat! ⚡";
+                    speed2Indicator.style.color = "#FFA500";
+                } else {
+                    dino2Speed = Math.min(dino2Speed + 1, 5);
+                    speed2Indicator.textContent = "Terlalu lambat! 🐌";
+                    speed2Indicator.style.color = "#FF6B6B";
+                }
+                
+                // Add visual feedback
+                run2Button.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    run2Button.style.transform = 'scale(1)';
+                }, 100);
+            }
+        }
+
+        // Game loop
+        function gameLoop() {
+            if (!gameStarted || gameFinished) return;
+
+            // Update timer
+            const elapsed = Date.now() - startTime;
+            const minutes = Math.floor(elapsed / 60000);
+            const seconds = Math.floor((elapsed % 60000) / 1000);
+            timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+            // Decrease speed over time (deceleration)
+            dino1Speed = Math.max(dino1Speed - 0.05, 0);
+            dino2Speed = Math.max(dino2Speed - 0.05, 0);
+
+            // Update positions
+            dino1Position += dino1Speed * 0.3;
+            dino2Position += dino2Speed * 0.3;
+
+            // Clamp positions
+            dino1Position = Math.min(dino1Position, 100);
+            dino2Position = Math.min(dino2Position, 100);
+
+            // Update visual elements
+            updateDinosaurPositions();
+            updateProgressBars();
+
+            // Check for winner
+            if (dino1Position >= 100) {
+                endGame("Player 1 (🦕)");
+                return;
+            }
+            if (dino2Position >= 100) {
+                endGame("Player 2 (🦖)");
+                return;
+            }
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        function updateDinosaurPositions() {
+            const trackWidth = document.getElementById('track').offsetWidth - 120; // Account for dino width and finish line
+            dino1Element.style.transform = `translateX(${(dino1Position / 100) * trackWidth}px)`;
+            dino2Element.style.transform = `translateX(${(dino2Position / 100) * trackWidth}px)`;
+        }
+
+        function updateProgressBars() {
+            progress1.style.width = `${dino1Position}%`;
+            progress2.style.width = `${dino2Position}%`;
+        }
+
+        function endGame(winner) {
+            gameFinished = true;
+            const elapsed = Date.now() - startTime;
+            const minutes = Math.floor(elapsed / 60000);
+            const seconds = Math.floor((elapsed % 60000) / 1000);
+            
+            winnerText.textContent = `${winner} Menang!`;
+            finalTimeText.textContent = `Waktu: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            setTimeout(() => {
+                winnerPopup.style.display = 'block';
+            }, 500);
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (gameStarted && !gameFinished) {
+                updateDinosaurPositions();
+            }
+        });
+
+        // Keyboard controls (optional)
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'KeyA' || e.code === 'ArrowLeft') {
+                handleClick(1);
+            }
+            if (e.code === 'KeyL' || e.code === 'ArrowRight') {
+                handleClick(2);
+            }
+        });
+
+        // Initialize positions
+        updateDinosaurPositions();
+        updateProgressBars();
+    </script>
+</body>
+</html>
