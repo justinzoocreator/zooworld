@@ -4,177 +4,770 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Justin's Zoo Wonders - Portofolio & Personal Branding</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #3aa66b;
-            --secondary: #1f6844;
-            --light: #f3f7f5;
-            --dark: #1a1a1a;
+            --primary: #2ecc71;
+            --secondary: #27ae60;
+            --accent: #f39c12;
+            --orange: #e67e22;
+            --blue: #3498db;
+            --purple: #9b59b6;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --jungle: #1e5a3a;
         }
-        body {
+        
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
             font-family: "Poppins", Arial, sans-serif;
-            background: var(--light);
+            background: linear-gradient(135deg, #e8f5e9 0%, #fff9e6 100%);
             color: var(--dark);
+            overflow-x: hidden;
+            position: relative;
         }
+
+        /* Animated Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(46, 204, 113, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(243, 156, 18, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(52, 152, 219, 0.05) 0%, transparent 50%);
+            animation: bgFloat 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(20px, -20px) scale(1.1); }
+        }
+
+        /* Floating Animal Emojis */
+        .floating-animals {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .animal-emoji {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.15;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .animal-emoji:nth-child(1) { left: 10%; animation-delay: 0s; top: 20%; }
+        .animal-emoji:nth-child(2) { left: 70%; animation-delay: 2s; top: 40%; }
+        .animal-emoji:nth-child(3) { left: 30%; animation-delay: 4s; top: 60%; }
+        .animal-emoji:nth-child(4) { left: 80%; animation-delay: 6s; top: 80%; }
+        .animal-emoji:nth-child(5) { left: 50%; animation-delay: 3s; top: 30%; }
+        .animal-emoji:nth-child(6) { left: 15%; animation-delay: 5s; top: 70%; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-30px) rotate(5deg); }
+            50% { transform: translateY(-60px) rotate(-5deg); }
+            75% { transform: translateY(-30px) rotate(3deg); }
+        }
+
+        /* Header Section */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, #1e5a3a 0%, #2ecc71 50%, #27ae60 100%);
             color: white;
-            padding: 70px 20px;
+            padding: 100px 20px 80px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px);
+            animation: stripesMove 20s linear infinite;
+        }
+
+        @keyframes stripesMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(100px); }
+        }
+
+        .profile-container {
+            position: relative;
+            display: inline-block;
+            animation: fadeInDown 1s ease-out;
+        }
+
         header img {
-            width: 180px;
-            height: 180px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             object-fit: cover;
-            border: 6px solid rgba(255,255,255,0.8);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            border: 8px solid rgba(255,255,255,0.9);
+            box-shadow: 
+                0 10px 40px rgba(0,0,0,0.3),
+                0 0 0 15px rgba(255,255,255,0.1),
+                0 0 60px rgba(46, 204, 113, 0.5);
+            transition: transform 0.5s ease;
+            position: relative;
+            z-index: 2;
         }
+
+        header img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .profile-badge {
+            position: absolute;
+            bottom: 10px;
+            right: -10px;
+            background: var(--accent);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+            animation: pulse 2s infinite;
+            z-index: 3;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
         header h1 {
-            font-size: 2.4rem;
-            margin-top: 25px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 3rem;
+            margin-top: 30px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+            position: relative;
+            z-index: 2;
         }
+
         header p {
+            font-size: 1.2rem;
+            margin-top: 15px;
             opacity: 0.95;
-            font-size: 1.1rem;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+            position: relative;
+            z-index: 2;
         }
 
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Container */
         .container {
-            max-width: 1100px;
-            margin: 40px auto;
+            max-width: 1200px;
+            margin: -40px auto 40px;
             padding: 20px;
+            position: relative;
+            z-index: 2;
         }
 
+        /* Card Styles */
         .card {
             background: white;
-            padding: 30px;
-            border-radius: 18px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-            margin-bottom: 40px;
-            transition: 0.3s ease;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 
+                0 10px 40px rgba(0,0,0,0.08),
+                0 0 0 1px rgba(46, 204, 113, 0.1);
+            margin-bottom: 30px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInCard 0.6s ease-out forwards;
         }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInCard {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--blue), var(--purple));
+            background-size: 300% 100%;
+            animation: gradientSlide 3s ease infinite;
+        }
+
+        @keyframes gradientSlide {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
         .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.15),
+                0 0 0 1px rgba(46, 204, 113, 0.2);
         }
+
         .card h2 {
-            color: var(--secondary);
-            margin-top: 0;
+            font-family: 'Fredoka', sans-serif;
+            color: var(--jungle);
+            margin-bottom: 20px;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card h2::before {
+            content: '';
+            width: 8px;
+            height: 40px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            animation: heightPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes heightPulse {
+            0%, 100% { height: 40px; }
+            50% { height: 50px; }
+        }
+
+        .card p, .card li {
+            line-height: 1.8;
+            font-size: 1.05rem;
+            color: #555;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            padding: 12px 0 12px 40px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .card li:hover {
+            padding-left: 50px;
+            color: var(--primary);
+        }
+
+        .card li::before {
+            content: '🦁';
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card li:nth-child(2)::before { content: '🐘'; }
+        .card li:nth-child(3)::before { content: '🦒'; }
+        .card li:nth-child(4)::before { content: '🐯'; }
+
+        .card li:hover::before {
+            transform: scale(1.3) rotate(10deg);
         }
 
         /* Merchandise Grid */
         .merch-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-        .merch-item {
-            background: #ffffff;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-            transition: 0.3s ease;
-        }
-        .merch-item:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 10px 28px rgba(0,0,0,0.15);
-        }
-        .merch-item img {
-            width: 100%;
-            object-fit: cover;
-        }
-        .merch-info {
-            padding: 15px 18px;
-        }
-        .merch-info h3 {
-            margin: 0;
-            font-size: 1.1rem;
-            color: var(--dark);
-        }
-        .merch-info a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 16px;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            transition: 0.25s;
-        }
-        .merch-info a:hover {
-            background: var(--secondary);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
         }
 
-        footer {
-            text-align: center;
+        .merch-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .merch-item:hover {
+            transform: translateY(-15px) rotate(-2deg);
+            box-shadow: 0 20px 50px rgba(46, 204, 113, 0.3);
+            border-color: var(--primary);
+        }
+
+        .merch-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .merch-item:hover img {
+            transform: scale(1.15);
+        }
+
+        .merch-info {
             padding: 25px;
-            margin-top: 50px;
-            background: #dfeae5;
-            color: #333;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+
+        .merch-info h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.3rem;
+            color: var(--dark);
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .merch-info a {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .merch-info a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .merch-info a:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .merch-info a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(46, 204, 113, 0.5);
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            border-left-width: 8px;
+            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.2);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .contact-item:nth-child(1) .contact-icon { animation-delay: 0s; }
+        .contact-item:nth-child(2) .contact-icon { animation-delay: 0.3s; }
+        .contact-item:nth-child(3) .contact-icon { animation-delay: 0.6s; }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--jungle) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 50px 20px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+
+        footer::before {
+            content: '🦁 🐘 🦒 🐯 🦓 🦘 🐼 🦍';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 200%;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: scrollAnimals 30s linear infinite;
+        }
+
+        @keyframes scrollAnimals {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        footer p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-logo {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-links a:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-5px) rotate(360deg);
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            header img {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .card {
+                padding: 25px;
+            }
+            
+            .card h2 {
+                font-size: 1.5rem;
+            }
+            
+            .merch-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 15px;
+            background: linear-gradient(135deg, var(--accent), var(--orange));
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
         }
     </style>
 </head>
 <body>
 
+<!-- Floating Animals Background -->
+<div class="floating-animals">
+    <div class="animal-emoji">🦁</div>
+    <div class="animal-emoji">🐘</div>
+    <div class="animal-emoji">🦒</div>
+    <div class="animal-emoji">🐯</div>
+    <div class="animal-emoji">🦓</div>
+    <div class="animal-emoji">🦘</div>
+</div>
+
+<!-- Header -->
 <header>
-    <img src="https://raw.githubusercontent.com/justinzoocreator/zooworld/refs/heads/main/ChatGPT%20Image%2020%20Nov%202025%2C%2011.09.18.png" alt="Foto Profil" />
-    <h1>Justin Wijaya — Founder of Justin's Zoo Wonders</h1>
-    <p>Pecinta hewan, peneliti fauna, dan pencipta koleksi kebun binatang digital.</p>
+    <div class="profile-container">
+        <img src="https://raw.githubusercontent.com/justinzoocreator/zooworld/refs/heads/main/ChatGPT%20Image%2020%20Nov%202025%2C%2011.09.18.png" alt="Justin Wijaya" />
+        <div class="profile-badge">🌟 Founder</div>
+    </div>
+    <h1>Justin Wijaya <span class="badge">Zoo Creator</span></h1>
+    <p>🦁 Pecinta Hewan | 🌿 Peneliti Fauna | 🎨 Pencipta Koleksi Kebun Binatang Digital</p>
 </header>
 
+<!-- Main Container -->
 <div class="container">
 
+    <!-- About Section -->
     <div class="card">
-        <h2>Tentang Saya</h2>
+        <h2>🌍 Tentang Saya</h2>
         <p>
-            Saya Justin, seseorang yang memiliki cinta mendalam terhadap hewan dan dunia satwa. Ketertarikan saya tumbuh dari rasa penasaran yang besar
-            terhadap bagaimana hewan hidup, berperilaku, dan berinteraksi. Dari sanalah muncul impian besar saya: membangun <b>Zoo Collection</b> saya sendiri
-            sebagai ruang edukasi, konservasi, dan hiburan yang dapat dinikmati banyak orang.
+            Halo! Saya <strong>Justin Wijaya</strong>, seseorang yang memiliki cinta mendalam terhadap hewan dan dunia satwa. 
+            Ketertarikan saya tumbuh dari rasa penasaran yang besar terhadap bagaimana hewan hidup, berperilaku, dan berinteraksi 
+            dengan lingkungan mereka. Dari sanalah muncul impian besar saya: membangun <strong>Justin's Zoo Wonders</strong> 
+            sebagai ruang edukasi, konservasi, dan hiburan yang dapat dinikmati oleh semua kalangan.
+        </p>
+        <p style="margin-top: 15px;">
+            Melalui platform ini, saya ingin berbagi pengetahuan, kreativitas, dan passion saya dalam dunia fauna kepada Anda semua! 🌟
         </p>
     </div>
 
+    <!-- Mission & Vision -->
     <div class="card">
-        <h2>Misi & Visi</h2>
+        <h2>🎯 Misi & Visi</h2>
         <ul>
-            <li>Menyebarkan kecintaan terhadap fauna melalui edukasi digital dan visual.</li>
-            <li>Membangun "Justin's Zoo Wonders" sebagai koleksi kebun binatang modern.</li>
-            <li>Mendorong kesadaran terhadap perlindungan hewan dan habitatnya.</li>
-            <li>Menciptakan karya kreatif dan merchandise bertema satwa.</li>
+            <li>Menyebarkan kecintaan terhadap fauna melalui edukasi digital dan visual yang menarik</li>
+            <li>Membangun "Justin's Zoo Wonders" sebagai koleksi kebun binatang modern & interaktif</li>
+            <li>Mendorong kesadaran global terhadap perlindungan hewan dan habitatnya</li>
+            <li>Menciptakan karya kreatif dan merchandise bertema satwa yang berkualitas tinggi</li>
         </ul>
     </div>
 
+    <!-- Merchandise Section -->
     <div class="card">
-        <h2>Merchandise Resmi — Justin's Zoo Wonders</h2>
-        <p>Koleksi baju, desain hewan lucu, dan karya eksklusif yang dapat Anda beli kapan saja!</p>
+        <h2>🛍️ Merchandise Resmi — Justin's Zoo Wonders</h2>
+        <p>
+            Koleksi eksklusif baju, aksesori, dan desain hewan lucu yang dibuat dengan penuh cinta! 
+            Setiap pembelian Anda mendukung misi konservasi kami. 💚
+        </p>
 
         <div class="merch-grid">
             <div class="merch-item">
-                <img src="https://res.cloudinary.com/teepublic/image/private/s--Example1--/t_Preview/b_rgb:ffffff,c_limit,f_auto,h_630,q_90,w_630/v123456789/justinszoo_design.png" alt="Merch Sample" />
+                <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500&h=500&fit=crop" alt="Zoo T-Shirt Collection" />
                 <div class="merch-info">
-                    <h3>Kunjungi Toko Resmi</h3>
-                    <a href="https://www.teepublic.com/user/justin-s-zoo-wonders" target="_blank">Lihat Merchandise</a>
+                    <h3>🦁 Lion Pride Collection</h3>
+                    <a href="https://www.teepublic.com/user/justin-s-zoo-wonders" target="_blank">🛒 Belanja Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="merch-item">
+                <img src="https://images.unsplash.com/photo-1489084917528-a57e68a79a1e?w=500&h=500&fit=crop" alt="Elephant Design" />
+                <div class="merch-info">
+                    <h3>🐘 Elephant Kingdom</h3>
+                    <a href="https://www.teepublic.com/user/justin-s-zoo-wonders" target="_blank">🛒 Belanja Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="merch-item">
+                <img src="https://images.unsplash.com/photo-1516367893642-f5ff0cd5ff9c?w=500&h=500&fit=crop" alt="Giraffe Design" />
+                <div class="merch-info">
+                    <h3>🦒 Giraffe Heights</h3>
+                    <a href="https://www.teepublic.com/user/justin-s-zoo-wonders" target="_blank">🛒 Belanja Sekarang</a>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Contact Section -->
     <div class="card">
-        <h2>Kontak & Media Sosial</h2>
-        <ul>
-            <li>Email: your-email@example.com</li>
-            <li>Instagram: @yourusername</li>
-            <li>GitHub: @justinzoocreator</li>
-        </ul>
+        <h2>📬 Kontak & Media Sosial</h2>
+        <p>Mari terhubung dan berbagi kecintaan kita terhadap dunia hewan! 🌿</p>
+        
+        <div class="contact-grid">
+            <div class="contact-item">
+                <div class="contact-icon">📧</div>
+                <div>
+                    <strong>Email</strong><br>
+                    your-email@example.com
+                </div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-icon">📸</div>
+                <div>
+                    <strong>Instagram</strong><br>
+                    @yourusername
+                </div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-icon">💻</div>
+                <div>
+                    <strong>GitHub</strong><br>
+                    @justinzoocreator
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
 
+<!-- Footer -->
 <footer>
-    © 2025 Justin's Zoo Wonders — Passion for Animals & Creative Wildlife Collections
+    <div class="footer-logo">🦁 Justin's Zoo Wonders 🌿</div>
+    <p>Passion for Animals & Creative Wildlife Collections</p>
+    <div class="social-links">
+        <a href="#" title="Instagram">📸</a>
+        <a href="#" title="Twitter">🐦</a>
+        <a href="#" title="Facebook">📘</a>
+        <a href="#" title="YouTube">🎥</a>
+    </div>
+    <p style="margin-top: 30px; font-size: 0.9rem; opacity: 0.8;">
+        © 2025 Justin's Zoo Wonders — All Rights Reserved
+    </p>
 </footer>
+
+<!-- Scroll to Top Button -->
+<div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+    ↑
+</div>
+
+<script>
+    // Scroll to Top Functionality
+    window.addEventListener('scroll', function() {
+        const scrollTop = document.getElementById('scrollTop');
+        if (window.pageYOffset > 300) {
+            scrollTop.classList.add('visible');
+        } else {
+            scrollTop.classList.remove('visible');
+        }
+    });
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // Intersection Observer for Card Animations
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    cards.forEach(card => {
+        observer.observe(card);
+    });
+
+    // Parallax Effect for Header
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const header = document.querySelector('header');
+        if (header) {
+            header.style.transform = `translateY(${scrolled * 0.5}px)`;
+        }
+    });
+
+    // Add dynamic animal emojis on hover
+    document.querySelectorAll('.merch-item').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-15px) rotate(' + (Math.random() * 6 - 3) + 'deg)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) rotate(0deg)';
+        });
+    });
+</script>
 
 </body>
 </html>
