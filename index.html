@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Justin's Zoo Wonders - Portofolio & Personal Branding</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --secondary: #27ae60;
+            --accent: #f39c12;
+            --orange: #e67e22;
+            --blue: #3498db;
+            --purple: #9b59b6;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --jungle: #1e5a3a;
+            --danger: #e74c3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Poppins", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f5e9 0%, #fff9e6 100%);
+            color: var(--dark);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(46, 204, 113, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(243, 156, 18, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(52, 152, 219, 0.05) 0%, transparent 50%);
+            animation: bgFloat 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(20px, -20px) scale(1.1); }
+        }
+
+        /* Floating Animal Emojis */
+        .floating-animals {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .animal-emoji {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.15;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .animal-emoji:nth-child(1) { left: 10%; animation-delay: 0s; top: 20%; }
+        .animal-emoji:nth-child(2) { left: 70%; animation-delay: 2s; top: 40%; }
+        .animal-emoji:nth-child(3) { left: 30%; animation-delay: 4s; top: 60%; }
+        .animal-emoji:nth-child(4) { left: 80%; animation-delay: 6s; top: 80%; }
+        .animal-emoji:nth-child(5) { left: 50%; animation-delay: 3s; top: 30%; }
+        .animal-emoji:nth-child(6) { left: 15%; animation-delay: 5s; top: 70%; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-30px) rotate(5deg); }
+            50% { transform: translateY(-60px) rotate(-5deg); }
+            75% { transform: translateY(-30px) rotate(3deg); }
+        }
+
+        /* Header Section */
+        header {
+            background: linear-gradient(135deg, #1e5a3a 0%, #2ecc71 50%, #27ae60 100%);
+            color: white;
+            padding: 100px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px);
+            animation: stripesMove 20s linear infinite;
+        }
+
+        @keyframes stripesMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(100px); }
+        }
+
+        .profile-container {
+            position: relative;
+            display: inline-block;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        header img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid rgba(255,255,255,0.9);
+            box-shadow: 
+                0 10px 40px rgba(0,0,0,0.3),
+                0 0 0 15px rgba(255,255,255,0.1),
+                0 0 60px rgba(46, 204, 113, 0.5);
+            transition: transform 0.5s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        header img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .profile-badge {
+            position: absolute;
+            bottom: 10px;
+            right: -10px;
+            background: var(--accent);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+            animation: pulse 2s infinite;
+            z-index: 3;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        header h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 3rem;
+            margin-top: 30px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 15px;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: -40px auto 40px;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Card Styles */
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 
+                0 10px 40px rgba(0,0,0,0.08),
+                0 0 0 1px rgba(46, 204, 113, 0.1);
+            margin-bottom: 30px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInCard 0.6s ease-out forwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInCard {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--blue), var(--purple));
+            background-size: 300% 100%;
+            animation: gradientSlide 3s ease infinite;
+        }
+
+        @keyframes gradientSlide {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.15),
+                0 0 0 1px rgba(46, 204, 113, 0.2);
+        }
+
+        .card h2 {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--jungle);
+            margin-bottom: 20px;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card h2::before {
+            content: '';
+            width: 8px;
+            height: 40px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            animation: heightPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes heightPulse {
+            0%, 100% { height: 40px; }
+            50% { height: 50px; }
+        }
+
+        .card p, .card li {
+            line-height: 1.8;
+            font-size: 1.05rem;
+            color: #555;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            padding: 12px 0 12px 40px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .card li:hover {
+            padding-left: 50px;
+            color: var(--primary);
+        }
+
+        .card li::before {
+            content: '🦁';
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card li:nth-child(2)::before { content: '🐘'; }
+        .card li:nth-child(3)::before { content: '🦒'; }
+        .card li:nth-child(4)::before { content: '🐯'; }
+
+        .card li:hover::before {
+            transform: scale(1.3) rotate(10deg);
+        }
+
+        /* Merchandise Grid */
+        .merch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .merch-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .merch-item:hover {
+            transform: translateY(-15px) rotate(-2deg);
+            box-shadow: 0 20px 50px rgba(46, 204, 113, 0.3);
+            border-color: var(--primary);
+        }
+
+        .merch-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .merch-item:hover img {
+            transform: scale(1.15);
+        }
+
+        .merch-info {
+            padding: 25px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+
+        .merch-info h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.3rem;
+            color: var(--dark);
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .merch-info a {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .merch-info a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .merch-info a:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .merch-info a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(46, 204, 113, 0.5);
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            border-left-width: 8px;
+            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.2);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .contact-item:nth-child(1) .contact-icon { animation-delay: 0s; }
+        .contact-item:nth-child(2) .contact-icon { animation-delay: 0.3s; }
+        .contact-item:nth-child(3) .contact-icon { animation-delay: 0.6s; }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--jungle) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 50px 20px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+
+        footer::before {
+            content: '🦁 🐘 🦒 🐯 🦓 🦘 🐼 🦍';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 200%;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: scrollAnimals 30s linear infinite;
+        }
+
+        @keyframes scrollAnimals {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        footer p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-logo {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-5px) rotate(360deg);
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            header img {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .card {
+                padding: 25px;
+            }
+            
+            .card h2 {
+                font-size: 1.5rem;
+            }
+            
+            .merch-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 15px;
+            background: linear-gradient(135deg, var(--accent), var(--orange));
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        /* ==================== ADMIN PANEL STYLES ==================== */
+        
+        /* Hidden Admin Button */
+        .admin-trigger {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(155, 89, 182, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .admin-trigger.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .admin-trigger:hover {
+            transform: scale(1.1) rotate(180deg);
+        }
+
+        /* Admin Panel Overlay */
+        .admin-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .admin-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 90%;
+            max-width: 900px;
+            max-height: 85vh;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+
+        .admin-panel.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, var(--jungle), var(--primary));
+            color: white;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-header h2 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .admin-close {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .admin-close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(90deg);
+        }
+
+        .admin-body {
+            padding: 30px;
+            max-height: calc(85vh - 80px);
+            overflow-y: auto;
+        }
+
+        /* Admin Tabs */
+        .admin-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .admin-tab {
+            padding: 12px 25px;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .admin-tab:hover {
+            background: #e8e8e8;
+        }
+
+        .admin-tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .admin-content {
+            display: none;
+        }
+
+        .admin-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.1);
+        }
+
+        /* Merchandise Edit Cards */
+        .merch-edit-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .merch-edit-card:hover {
+            border-color: var(--primary);
+        }
+
+        .merch-edit-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .merch-edit-header img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .merch-edit-header h4 {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--dark);
+        }
+
+        .merch-edit-header span {
+            background: var(--accent);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: auto;
+        }
+
+        /* Social Edit Cards */
+        .social-edit-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .social-edit-card:hover {
+            border-color: var(--blue);
+        }
+
+        .social-edit-icon {
+            font-size: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-edit-fields {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+        }
+
+        .social-edit-fields input {
+            padding: 10px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .social-edit-fields input:focus {
+            outline: none;
+            border-color: var(--blue);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger), #c0392b);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-add {
+            background: linear-gradient(135deg, var(--accent), var(--orange));
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(243, 156, 18, 0.4);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 10px 40px rgba(46, 204, 113, 0.4);
+            z-index: 10001;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.error {
+            background: linear-gradient(135deg, var(--danger), #c0392b);
+        }
+
+        /* Password Modal */
+        .password-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+        }
+
+        .password-modal.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .password-modal h3 {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--jungle);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .password-modal input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .password-modal input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Delete Button */
+        .btn-delete {
+            width: 35px;
+            height: 35px;
+            background: #ff6b6b;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-delete:hover {
+            background: var(--danger);
+            transform: scale(1.1);
+        }
+
+        /* Hint Text */
+        .admin-hint {
+            position: fixed;
+            bottom: 160px;
+            right: 30px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 998;
+        }
+
+        .admin-hint.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Contact Edit */
+        .contact-edit-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .contact-edit-card:hover {
+            border-color: var(--primary);
+        }
+
+        .contact-edit-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .contact-edit-header span {
+            font-size: 1.5rem;
+        }
+
+        /* Responsive Admin Panel */
+        @media (max-width: 768px) {
+            .admin-panel {
+                width: 95%;
+                max-height: 90vh;
+            }
+            
+            .admin-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .admin-tab {
+                flex: 1;
+                justify-content: center;
+                padding: 10px 15px;
+            }
+            
+            .social-edit-fields {
+                grid-template-columns: 1fr;
+            }
+            
+            .merch-edit-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .merch-edit-header span {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Floating Animals Background -->
+<div class="floating-animals">
+    <div class="animal-emoji">🦁</div>
+    <div class="animal-emoji">🐘</div>
+    <div class="animal-emoji">🦒</div>
+    <div class="animal-emoji">🐯</div>
+    <div class="animal-emoji">🦓</div>
+    <div class="animal-emoji">🦘</div>
+</div>
+
+<!-- Header -->
+<header>
+    <div class="profile-container">
+        <img src="https://raw.githubusercontent.com/justinzoocreator/zooworld/refs/heads/main/ChatGPT%20Image%2020%20Nov%202025%2C%2011.09.18.png" alt="Justin Wijaya" />
+        <div class="profile-badge">🌟 Founder</div>
+    </div>
+    <h1 id="titleTrigger">Justin Wijaya <span class="badge">Zoo Creator</span></h1>
+    <p>🦁 Pecinta Hewan | 🌿 Peneliti Fauna | 🎨 Pencipta Koleksi Kebun Binatang Digital</p>
+</header>
+
+<!-- Main Container -->
+<div class="container">
+
+    <!-- About Section -->
+    <div class="card">
+        <h2>🌍 Tentang Saya</h2>
+        <p>
+            Halo! Saya <strong>Justin Wijaya</strong>, seseorang yang memiliki cinta mendalam terhadap hewan dan dunia satwa. 
+            Ketertarikan saya tumbuh dari rasa penasaran yang besar terhadap bagaimana hewan hidup, berperilaku, dan berinteraksi 
+            dengan lingkungan mereka. Dari sanalah muncul impian besar saya: membangun <strong>Justin's Zoo Wonders</strong> 
+            sebagai ruang edukasi, konservasi, dan hiburan yang dapat dinikmati oleh semua kalangan.
+        </p>
+        <p style="margin-top: 15px;">
+            Melalui platform ini, saya ingin berbagi pengetahuan, kreativitas, dan passion saya dalam dunia fauna kepada Anda semua! 🌟
+        </p>
+    </div>
+
+    <!-- Mission & Vision -->
+    <div class="card">
+        <h2>🎯 Misi & Visi</h2>
+        <ul>
+            <li>Menyebarkan kecintaan terhadap fauna melalui edukasi digital dan visual yang menarik</li>
+            <li>Membangun "Justin's Zoo Wonders" sebagai koleksi kebun binatang modern & interaktif</li>
+            <li>Mendorong kesadaran global terhadap perlindungan hewan dan habitatnya</li>
+            <li>Menciptakan karya kreatif dan merchandise bertema satwa yang berkualitas tinggi</li>
+        </ul>
+    </div>
+
+    <!-- Merchandise Section -->
+    <div class="card">
+        <h2>🛍️ Merchandise Resmi — Justin's Zoo Wonders</h2>
+        <p>
+            Koleksi eksklusif baju, aksesori, dan desain hewan lucu yang dibuat dengan penuh cinta! 
+            Setiap pembelian Anda mendukung misi konservasi kami. 💚
+        </p>
+
+        <div class="merch-grid" id="merchGrid">
+            <!-- Merchandise items will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="card">
+        <h2>📬 Kontak & Media Sosial</h2>
+        <p>Mari terhubung dan berbagi kecintaan kita terhadap dunia hewan! 🌿</p>
+        
+        <div class="contact-grid" id="contactGrid">
+            <!-- Contact items will be dynamically loaded here -->
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-logo">🦁 Justin's Zoo Wonders 🌿</div>
+    <p>Passion for Animals & Creative Wildlife Collections</p>
+    <div class="social-links" id="socialLinks">
+        <!-- Social links will be dynamically loaded here -->
+    </div>
+    <p style="margin-top: 30px; font-size: 0.9rem; opacity: 0.8;">
+        © 2025 Justin's Zoo Wonders — All Rights Reserved
+    </p>
+</footer>
+
+<!-- Scroll to Top Button -->
+<div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+    ↑
+</div>
+
+<!-- Admin Trigger Button (Hidden by default) -->
+<div class="admin-trigger" id="adminTrigger" onclick="showPasswordModal()">
+    ⚙️
+</div>
+<div class="admin-hint" id="adminHint">Klik untuk membuka Admin Panel</div>
+
+<!-- Password Modal -->
+<div class="admin-overlay" id="passwordOverlay" onclick="hidePasswordModal()"></div>
+<div class="password-modal" id="passwordModal">
+    <h3>🔐 Admin Login</h3>
+    <p style="color: #666; margin-bottom: 20px;">Masukkan password untuk mengakses panel admin</p>
+    <input type="password" id="adminPassword" placeholder="Password" onkeypress="handlePasswordKeypress(event)">
+    <div class="btn-group" style="justify-content: center;">
+        <button class="btn btn-primary" onclick="checkPassword()">🔓 Masuk</button>
+        <button class="btn btn-secondary" onclick="hidePasswordModal()">Batal</button>
+    </div>
+    <p style="margin-top: 15px; font-size: 0.8rem; color: #999;">Hint: Password default adalah "zoo123"</p>
+</div>
+
+<!-- Admin Panel Overlay -->
+<div class="admin-overlay" id="adminOverlay" onclick="closeAdminPanel()"></div>
+
+<!-- Admin Panel -->
+<div class="admin-panel" id="adminPanel">
+    <div class="admin-header">
+        <h2>⚙️ Panel Admin</h2>
+        <button class="admin-close" onclick="closeAdminPanel()">×</button>
+    </div>
+    
+    <div class="admin-body">
+        <!-- Tabs -->
+        <div class="admin-tabs">
+            <button class="admin-tab active" onclick="switchTab('merch')" id="tabMerch">
+                🛍️ Merchandise
+            </button>
+            <button class="admin-tab" onclick="switchTab('social')" id="tabSocial">
+                📱 Social Media
+            </button>
+            <button class="admin-tab" onclick="switchTab('contact')" id="tabContact">
+                📬 Kontak
+            </button>
+            <button class="admin-tab" onclick="switchTab('settings')" id="tabSettings">
+                ⚙️ Pengaturan
+            </button>
+        </div>
+
+        <!-- Merchandise Content -->
+        <div class="admin-content active" id="contentMerch">
+            <button class="btn btn-add" onclick="addMerchItem()">
+                ➕ Tambah Merchandise Baru
+            </button>
+            
+            <div id="merchEditList">
+                <!-- Merchandise edit cards will be loaded here -->
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="saveMerch()">💾 Simpan Perubahan</button>
+                <button class="btn btn-secondary" onclick="resetMerch()">🔄 Reset ke Default</button>
+            </div>
+        </div>
+
+        <!-- Social Media Content -->
+        <div class="admin-content" id="contentSocial">
+            <button class="btn btn-add" onclick="addSocialItem()">
+                ➕ Tambah Social Media Baru
+            </button>
+            
+            <div id="socialEditList">
+                <!-- Social edit cards will be loaded here -->
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="saveSocial()">💾 Simpan Perubahan</button>
+                <button class="btn btn-secondary" onclick="resetSocial()">🔄 Reset ke Default</button>
+            </div>
+        </div>
+
+        <!-- Contact Content -->
+        <div class="admin-content" id="contentContact">
+            <div id="contactEditList">
+                <!-- Contact edit cards will be loaded here -->
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="saveContact()">💾 Simpan Perubahan</button>
+                <button class="btn btn-secondary" onclick="resetContact()">🔄 Reset ke Default</button>
+            </div>
+        </div>
+
+        <!-- Settings Content -->
+        <div class="admin-content" id="contentSettings">
+            <div class="form-group">
+                <label>🔐 Ubah Password Admin</label>
+                <input type="password" id="newPassword" placeholder="Password baru">
+            </div>
+            <div class="form-group">
+                <label>🔐 Konfirmasi Password Baru</label>
+                <input type="password" id="confirmPassword" placeholder="Konfirmasi password">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="changePassword()">🔒 Ubah Password</button>
+            </div>
+            
+            <hr style="margin: 30px 0; border: none; border-top: 2px solid #eee;">
+            
+            <h4 style="margin-bottom: 15px; color: var(--danger);">⚠️ Zona Berbahaya</h4>
+            <button class="btn btn-danger" onclick="resetAllData()">🗑️ Reset Semua Data ke Default</button>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast">
+    <span id="toastIcon">✅</span>
+    <span id="toastMessage">Perubahan berhasil disimpan!</span>
+</div>
+
+<script>
+    // ==================== DATA DEFAULTS ====================
+    
+    const defaultMerch = [
+        {
+            id: 1,
+            image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500&h=500&fit=crop",
+            title: "🦁 Lion Pride Collection",
+            link: "https://www.teepublic.com/user/justin-s-zoo-wonders"
+        },
+        {
+            id: 2,
+            image: "https://images.unsplash.com/photo-1489084917528-a57e68a79a1e?w=500&h=500&fit=crop",
+            title: "🐘 Elephant Kingdom",
+            link: "https://www.teepublic.com/user/justin-s-zoo-wonders"
+        },
+        {
+            id: 3,
+            image: "https://images.unsplash.com/photo-1516367893642-f5ff0cd5ff9c?w=500&h=500&fit=crop",
+            title: "🦒 Giraffe Heights",
+            link: "https://www.teepublic.com/user/justin-s-zoo-wonders"
+        }
+    ];
+
+    const defaultSocial = [
+        { id: 1, icon: "📸", name: "Instagram", link: "https://instagram.com/yourusername" },
+        { id: 2, icon: "🐦", name: "Twitter", link: "https://twitter.com/yourusername" },
+        { id: 3, icon: "📘", name: "Facebook", link: "https://facebook.com/yourusername" },
+        { id: 4, icon: "🎥", name: "YouTube", link: "https://youtube.com/@yourusername" }
+    ];
+
+    const defaultContact = [
+        { id: 1, icon: "📧", label: "Email", value: "your-email@example.com" },
+        { id: 2, icon: "📸", label: "Instagram", value: "@yourusername" },
+        { id: 3, icon: "💻", label: "GitHub", value: "@justinzoocreator" }
+    ];
+
+    const defaultPassword = "zoo123";
+
+    // ==================== DATA MANAGEMENT ====================
+
+    function loadData(key, defaultValue) {
+        const saved = localStorage.getItem(key);
+        return saved ? JSON.parse(saved) : defaultValue;
+    }
+
+    function saveData(key, data) {
+        localStorage.setItem(key, JSON.stringify(data));
+    }
+
+    let merchData = loadData('merchData', defaultMerch);
+    let socialData = loadData('socialData', defaultSocial);
+    let contactData = loadData('contactData', defaultContact);
+    let adminPassword = loadData('adminPassword', defaultPassword);
+
+    // ==================== RENDER FUNCTIONS ====================
+
+    function renderMerch() {
+        const grid = document.getElementById('merchGrid');
+        grid.innerHTML = merchData.map(item => `
+            <div class="merch-item">
+                <img src="${item.image}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/500x500?text=Image+Not+Found'" />
+                <div class="merch-info">
+                    <h3>${item.title}</h3>
+                    <a href="${item.link}" target="_blank">🛒 Belanja Sekarang</a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderSocialLinks() {
+        const container = document.getElementById('socialLinks');
+        container.innerHTML = socialData.map(item => `
+            <a href="${item.link}" target="_blank" title="${item.name}">${item.icon}</a>
+        `).join('');
+    }
+
+    function renderContact() {
+        const grid = document.getElementById('contactGrid');
+        grid.innerHTML = contactData.map(item => `
+            <div class="contact-item">
+                <div class="contact-icon">${item.icon}</div>
+                <div>
+                    <strong>${item.label}</strong><br>
+                    ${item.value}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderMerchEditList() {
+        const list = document.getElementById('merchEditList');
+        list.innerHTML = merchData.map((item, index) => `
+            <div class="merch-edit-card">
+                <div class="merch-edit-header">
+                    <img src="${item.image}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/80x80?text=?'" />
+                    <div>
+                        <h4>${item.title}</h4>
+                        <small style="color: #888;">ID: ${item.id}</small>
+                    </div>
+                    <span>Item #${index + 1}</span>
+                    <button class="btn-delete" onclick="deleteMerchItem(${item.id})" title="Hapus">🗑️</button>
+                </div>
+                <div class="form-group">
+                    <label>URL Gambar</label>
+                    <input type="text" id="merchImg${item.id}" value="${item.image}" placeholder="https://example.com/image.jpg">
+                </div>
+                <div class="form-group">
+                    <label>Judul Produk</label>
+                    <input type="text" id="merchTitle${item.id}" value="${item.title}" placeholder="Nama produk">
+                </div>
+                <div class="form-group">
+                    <label>Link Pembelian</label>
+                    <input type="text" id="merchLink${item.id}" value="${item.link}" placeholder="https://store.com/product">
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderSocialEditList() {
+        const list = document.getElementById('socialEditList');
+        list.innerHTML = socialData.map((item, index) => `
+            <div class="social-edit-card">
+                <div class="social-edit-icon">${item.icon}</div>
+                <div class="social-edit-fields">
+                    <input type="text" id="socialIcon${item.id}" value="${item.icon}" placeholder="Emoji" style="text-align: center;">
+                    <input type="text" id="socialName${item.id}" value="${item.name}" placeholder="Nama Platform">
+                    <input type="text" id="socialLink${item.id}" value="${item.link}" placeholder="https://..." style="grid-column: span 2;">
+                </div>
+                <button class="btn-delete" onclick="deleteSocialItem(${item.id})" title="Hapus">🗑️</button>
+            </div>
+        `).join('');
+    }
+
+    function renderContactEditList() {
+        const list = document.getElementById('contactEditList');
+        list.innerHTML = contactData.map((item, index) => `
+            <div class="contact-edit-card">
+                <div class="contact-edit-header">
+                    <span>${item.icon}</span> ${item.label}
+                </div>
+                <div class="form-group">
+                    <label>Ikon (Emoji)</label>
+                    <input type="text" id="contactIcon${item.id}" value="${item.icon}" placeholder="📧">
+                </div>
+                <div class="form-group">
+                    <label>Label</label>
+                    <input type="text" id="contactLabel${item.id}" value="${item.label}" placeholder="Email, Instagram, dll">
+                </div>
+                <div class="form-group">
+                    <label>Nilai/Username</label>
+                    <input type="text" id="contactValue${item.id}" value="${item.value}" placeholder="email@example.com">
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // ==================== ADMIN PANEL FUNCTIONS ====================
+
+    let clickCount = 0;
+    let clickTimer = null;
+
+    document.getElementById('titleTrigger').addEventListener('click', function() {
+        clickCount++;
+        
+        if (clickCount === 1) {
+            clickTimer = setTimeout(() => {
+                clickCount = 0;
+            }, 2000);
+        }
+        
+        if (clickCount >= 5) {
+            clearTimeout(clickTimer);
+            clickCount = 0;
+            document.getElementById('adminTrigger').classList.add('visible');
+            document.getElementById('adminHint').classList.add('visible');
+            
+            setTimeout(() => {
+                document.getElementById('adminHint').classList.remove('visible');
+            }, 3000);
+            
+            showToast('🔓 Admin button muncul!', false);
+        }
+    });
+
+    // Keyboard shortcut: Ctrl + Shift + A
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+            e.preventDefault();
+            document.getElementById('adminTrigger').classList.add('visible');
+            showToast('🔓 Admin button aktif!', false);
+        }
+    });
+
+    function showPasswordModal() {
+        document.getElementById('passwordOverlay').classList.add('active');
+        document.getElementById('passwordModal').classList.add('active');
+        document.getElementById('adminPassword').focus();
+    }
+
+    function hidePasswordModal() {
+        document.getElementById('passwordOverlay').classList.remove('active');
+        document.getElementById('passwordModal').classList.remove('active');
+        document.getElementById('adminPassword').value = '';
+    }
+
+    function handlePasswordKeypress(e) {
+        if (e.key === 'Enter') {
+            checkPassword();
+        }
+    }
+
+    function checkPassword() {
+        const input = document.getElementById('adminPassword').value;
+        if (input === adminPassword) {
+            hidePasswordModal();
+            openAdminPanel();
+        } else {
+            showToast('❌ Password salah!', true);
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('adminPassword').focus();
+        }
+    }
+
+    function openAdminPanel() {
+        document.getElementById('adminOverlay').classList.add('active');
+        document.getElementById('adminPanel').classList.add('active');
+        renderMerchEditList();
+        renderSocialEditList();
+        renderContactEditList();
+    }
+
+    function closeAdminPanel() {
+        document.getElementById('adminOverlay').classList.remove('active');
+        document.getElementById('adminPanel').classList.remove('active');
+    }
+
+    function switchTab(tab) {
+        // Remove active from all tabs and contents
+        document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.admin-content').forEach(c => c.classList.remove('active'));
+        
+        // Add active to selected tab and content
+        document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
+        document.getElementById('content' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
+    }
+
+    // ==================== MERCHANDISE FUNCTIONS ====================
+
+    function addMerchItem() {
+        const newId = merchData.length > 0 ? Math.max(...merchData.map(m => m.id)) + 1 : 1;
+        merchData.push({
+            id: newId,
+            image: "https://via.placeholder.com/500x500?text=New+Product",
+            title: "🆕 Produk Baru",
+            link: "https://www.teepublic.com/user/justin-s-zoo-wonders"
+        });
+        renderMerchEditList();
+        showToast('➕ Merchandise baru ditambahkan!', false);
+    }
+
+    function deleteMerchItem(id) {
+        if (confirm('Yakin ingin menghapus item ini?')) {
+            merchData = merchData.filter(item => item.id !== id);
+            renderMerchEditList();
+            showToast('🗑️ Item dihapus!', false);
+        }
+    }
+
+    function saveMerch() {
+        merchData = merchData.map(item => ({
+            id: item.id,
+            image: document.getElementById('merchImg' + item.id).value,
+            title: document.getElementById('merchTitle' + item.id).value,
+            link: document.getElementById('merchLink' + item.id).value
+        }));
+        saveData('merchData', merchData);
+        renderMerch();
+        showToast('💾 Merchandise berhasil disimpan!', false);
+    }
+
+    function resetMerch() {
+        if (confirm('Reset merchandise ke default? Semua perubahan akan hilang.')) {
+            merchData = [...defaultMerch];
+            saveData('merchData', merchData);
+            renderMerchEditList();
+            renderMerch();
+            showToast('🔄 Merchandise direset ke default!', false);
+        }
+    }
+
+    // ==================== SOCIAL MEDIA FUNCTIONS ====================
+
+    function addSocialItem() {
+        const newId = socialData.length > 0 ? Math.max(...socialData.map(s => s.id)) + 1 : 1;
+        socialData.push({
+            id: newId,
+            icon: "🔗",
+            name: "Platform Baru",
+            link: "https://example.com"
+        });
+        renderSocialEditList();
+        showToast('➕ Social media baru ditambahkan!', false);
+    }
+
+    function deleteSocialItem(id) {
+        if (confirm('Yakin ingin menghapus item ini?')) {
+            socialData = socialData.filter(item => item.id !== id);
+            renderSocialEditList();
+            showToast('🗑️ Item dihapus!', false);
+        }
+    }
+
+    function saveSocial() {
+        socialData = socialData.map(item => ({
+            id: item.id,
+            icon: document.getElementById('socialIcon' + item.id).value,
+            name: document.getElementById('socialName' + item.id).value,
+            link: document.getElementById('socialLink' + item.id).value
+        }));
+        saveData('socialData', socialData);
+        renderSocialLinks();
+        showToast('💾 Social media berhasil disimpan!', false);
+    }
+
+    function resetSocial() {
+        if (confirm('Reset social media ke default?')) {
+            socialData = [...defaultSocial];
+            saveData('socialData', socialData);
+            renderSocialEditList();
+            renderSocialLinks();
+            showToast('🔄 Social media direset ke default!', false);
+        }
+    }
+
+    // ==================== CONTACT FUNCTIONS ====================
+
+    function saveContact() {
+        contactData = contactData.map(item => ({
+            id: item.id,
+            icon: document.getElementById('contactIcon' + item.id).value,
+            label: document.getElementById('contactLabel' + item.id).value,
+            value: document.getElementById('contactValue' + item.id).value
+        }));
+        saveData('contactData', contactData);
+        renderContact();
+        showToast('💾 Kontak berhasil disimpan!', false);
+    }
+
+    function resetContact() {
+        if (confirm('Reset kontak ke default?')) {
+            contactData = [...defaultContact];
+            saveData('contactData', contactData);
+            renderContactEditList();
+            renderContact();
+            showToast('🔄 Kontak direset ke default!', false);
+        }
+    }
+
+    // ==================== SETTINGS FUNCTIONS ====================
+
+    function changePassword() {
+        const newPass = document.getElementById('newPassword').value;
+        const confirmPass = document.getElementById('confirmPassword').value;
+        
+        if (!newPass || !confirmPass) {
+            showToast('❌ Isi semua field password!', true);
+            return;
+        }
+        
+        if (newPass !== confirmPass) {
+            showToast('❌ Password tidak cocok!', true);
+            return;
+        }
+        
+        if (newPass.length < 4) {
+            showToast('❌ Password minimal 4 karakter!', true);
+            return;
+        }
+        
+        adminPassword = newPass;
+        saveData('adminPassword', adminPassword);
+        document.getElementById('newPassword').value = '';
+        document.getElementById('confirmPassword').value = '';
+        showToast('🔒 Password berhasil diubah!', false);
+    }
+
+    function resetAllData() {
+        if (confirm('⚠️ PERINGATAN: Semua data akan direset ke default termasuk password. Lanjutkan?')) {
+            localStorage.clear();
+            merchData = [...defaultMerch];
+            socialData = [...defaultSocial];
+            contactData = [...defaultContact];
+            adminPassword = defaultPassword;
+            
+            renderMerch();
+            renderSocialLinks();
+            renderContact();
+            renderMerchEditList();
+            renderSocialEditList();
+            renderContactEditList();
+            
+            showToast('🗑️ Semua data berhasil direset!', false);
+        }
+    }
+
+    // ==================== TOAST NOTIFICATION ====================
+
+    function showToast(message, isError = false) {
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        const toastIcon = document.getElementById('toastIcon');
+        
+        toastMessage.textContent = message;
+        toastIcon.textContent = isError ? '❌' : '✅';
+        
+        toast.classList.remove('error');
+        if (isError) toast.classList.add('error');
+        
+        toast.classList.add('show');
+        
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    // ==================== SCROLL & OTHER FUNCTIONS ====================
+
+    window.addEventListener('scroll', function() {
+        const scrollTop = document.getElementById('scrollTop');
+        if (window.pageYOffset > 300) {
+            scrollTop.classList.add('visible');
+        } else {
+            scrollTop.classList.remove('visible');
+        }
+    });
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // Intersection Observer for Card Animations
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    cards.forEach(card => {
+        observer.observe(card);
+    });
+
+    // Parallax Effect for Header
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const header = document.querySelector('header');
+        if (header) {
+            header.style.transform = `translateY(${scrolled * 0.5}px)`;
+        }
+    });
+
+    // Add dynamic animal emojis on hover
+    document.querySelectorAll('.merch-item').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-15px) rotate(' + (Math.random() * 6 - 3) + 'deg)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) rotate(0deg)';
+        });
+    });
+
+    // ==================== INITIALIZE ====================
+
+    document.addEventListener('DOMContentLoaded', function() {
+        renderMerch();
+        renderSocialLinks();
+        renderContact();
+    });
+
+    // Initial render
+    renderMerch();
+    renderSocialLinks();
+    renderContact();
+</script>
+
+</body>
+</html>
